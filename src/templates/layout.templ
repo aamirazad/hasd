@@ -1,0 +1,53 @@
+package templates
+
+templ Layout() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="UTF-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<script defer data-project="6823bad3322ceedd6826fca3" src="/static/litlyx.js"></script>
+			<link href="/static/styles.css" rel="stylesheet"/>
+			<link rel="preload" as="image" href="/static/bwca-day-small.webp"/>
+			<title>WW2 Sim</title>
+		</head>
+		<body class="flex flex-col min-h-screen">
+			<div
+				id="bg-low"
+				class="fixed inset-0 z-[-10] pointer-events-none bg-no-repeat bg-cover bg-center transition-filter duration-200 ease-in-out bg-[#e8f5ea] blur-sm bg-[url(/static/bwca-day-small.webp)]"
+			></div>
+			<div
+				id="bg-high"
+				class="fixed inset-0 z-[-10] pointer-events-none bg-no-repeat bg-cover bg-center transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 bg-[url(https://cdn.aamira.me/bwca-day.webp)]"
+			></div>
+			<script>
+			// FADE IN HIGH QUALITY IMAGE
+			// Load a low quaility image quickly and then blur in the high quaility image before removing the low quality one
+			const lowResDiv = document.getElementById('bg-low');
+			const highResDiv = document.getElementById('bg-high');
+			const highResImageUrl = 'https://cdn.aamira.me/bwca-day.webp';
+
+			const highResImg = new Image();
+			highResImg.src = highResImageUrl;
+
+			highResImg.onload = () => {
+				highResDiv.classList.remove('opacity-0');
+				lowResDiv.classList.add('blur-none');
+				setTimeout(() => {
+				  lowResDiv.classList.add('hidden');
+				}, 500); 
+			};
+
+			highResImg.onerror = () => {
+				console.error('Failed to load high-resolution image.');
+			};
+			</script>
+			// MAIN PAGE CONTENT
+			@Header()
+			<main class="flex-grow">
+				{ children... }
+			</main>
+			@Footer()
+		</body>
+	</html>
+}

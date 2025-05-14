@@ -1,0 +1,16 @@
+# Air config for hot-reloading the Go server
+
+# Directory settings
+root = "."
+tmp_dir = "tmp"
+
+[build]
+cmd = "go build -o tmp/bin/main ./src/cmd"
+bin = "tmp/bin/main"
+include_ext = ["go"]
+exclude_dir = ["node_modules"]
+delay = 100
+stop_on_error = false
+
+[misc]
+clean_on_exit = true
