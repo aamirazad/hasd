@@ -1,0 +1,64 @@
+---
+import Head from "../components/Head.astro";
+const { title } = Astro.props;
+import "../styles/global.css";
+import { Image } from "astro:assets";
+import smallBackgroundImage from "../assets/bwca-day-small.webp";
+---
+
+<html lang="en">
+  <head>
+    <Head title={title} />
+    <!-- <link rel="preload" as="image" href={smallBackgroundImage.src}/> -->
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <Image
+      id="bg-low"
+      src={smallBackgroundImage}
+      loading="eager"
+      width={1920}
+      height={1080}
+      alt="a low quality calm landscape painting background"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea]"
+    />
+
+    <Image
+      id="bg-high"
+      src="https://cdn.aamira.me/bwca-day.webp"
+      alt="a high quality calm landscape painting background"
+      loading="lazy"
+      width={1920}
+      height={1080}
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0"
+    />
+
+    <script>
+      // FADE IN HIGH QUALITY IMAGE
+      // Load a low quality image quickly and then blur in the high quality image before removing the low quality one
+      const lowResDiv = document.getElementById("bg-low");
+      const highResDiv = document.getElementById("bg-high");
+      const highResImageUrl = "https://cdn.aamira.me/bwca-day.webp";
+
+      const highResImg = new Image();
+      highResImg.src = highResImageUrl;
+
+      highResImg.onload = () => {
+        highResDiv?.classList.remove("opacity-0");
+        lowResDiv?.classList.add("blur-none");
+        setTimeout(() => {
+          lowResDiv?.classList.add("hidden");
+        }, 500);
+      };
+
+      highResImg.onerror = () => {
+        console.error("Failed to load high-resolution image.");
+      };
+    </script>
+    // MAIN PAGE CONTENT
+    <div>Header</div>
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <div>Footer</div>
+  </body>
+</html>
