@@ -4,6 +4,8 @@ const { title } = Astro.props;
 import "../styles/global.css";
 import { Image } from "astro:assets";
 import smallBackgroundImage from "../assets/bwca-day-small.webp";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -54,11 +56,11 @@ import smallBackgroundImage from "../assets/bwca-day-small.webp";
         console.error("Failed to load high-resolution image.");
       };
     </script>
-    // MAIN PAGE CONTENT
-    <div>Header</div>
+    <!-- MAIN PAGE CONTENT -->
+    <Header />
     <main class="flex-grow">
       <slot />
     </main>
-    <div>Footer</div>
+    <Footer />
   </body>
 </html>
