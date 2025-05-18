@@ -10,13 +10,13 @@
 
 @layer components {
   .glass {
-    @apply bg-white/20 
-      backdrop-blur-lg 
-      bg-clip-padding 
-      backdrop-filter 
-      backdrop-saturate-100 
-      backdrop-contrast-100 
-      border 
+    @apply bg-white/20
+      backdrop-blur-lg
+      bg-clip-padding
+      backdrop-filter
+      backdrop-saturate-100
+      backdrop-contrast-100
+      border
       border-[rgba(255,255,255,0.6)];
 
     box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);

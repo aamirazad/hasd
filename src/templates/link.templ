@@ -1,7 +1,0 @@
-package templates
-
-templ Link(href string, text string) {
-	<a href={ templ.SafeURL(href) } class="text-blue-600 hover:underline">
-		{ templ.EscapeString(text) }
-	</a>
-}
