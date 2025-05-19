@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 .container {
   margin-left: auto;
@@ -27,37 +28,36 @@
   .link:hover {
     @apply decoration-sky-500;
   }
-}
+  /* Bold and Strong Tags */
+  b,
+  strong {
+    @apply font-semibold;
+  }
 
-/* Bold and Strong Tags */
-b,
-strong {
-  @apply font-semibold;
-}
+  /* Image Styles */
+  img {
+    @apply mx-auto;
+  }
 
-/* Image Styles */
-img {
-  @apply mx-auto;
-}
+  /* Link Hover Styles */
+  a:hover,
+  .a:hover {
+    @apply opacity-80;
+  }
 
-/* Link Hover Styles */
-a:hover,
-.a:hover {
-  @apply opacity-80;
-}
+  /* Input Styles for Number Fields (Cross-browser compatibility) */
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 
-/* Input Styles for Number Fields (Cross-browser compatibility) */
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-/* Code Styling */
-code {
-  @apply border-none;
+  /* Code Styling */
+  code {
+    @apply border-none;
+  }
 }

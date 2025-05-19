@@ -1,0 +1,18 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+const posts = await getCollection("posts");
+---
+
+<BaseLayout className="container mx-auto max-w-prose py-8 prose" title="Posts">
+  <h1>My posts</h1>
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a href={`/posts/${post.id}`}>{post.data.title}</a>
+        </li>
+      ))
+    }
+  </ul>
+</BaseLayout>
