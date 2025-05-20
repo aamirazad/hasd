@@ -13,6 +13,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   redirects: {
-    "/admin": "/admin/index.html",
+    "/admin/": "/admin/index.html",
   },
 });
