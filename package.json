@@ -4,18 +4,18 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "tinacms dev -c \"astro dev\"",
-    "build": "astro build",
+    "build": "tinacms build && astro build",
     "lint": "astro check",
     "start": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "astro": "^5.7.13",
-    "@tailwindcss/vite": "^4.1.7"
+    "@tailwindcss/vite": "^4.1.7",
+    "tinacms": "^2.7.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
-    "tinacms": "^2.7.7",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.8.3",
     "@tailwindcss/typography": "^0.5.16",
