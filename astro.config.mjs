@@ -12,7 +12,4 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  redirects: {
-    "/admin/": "/admin/index.html",
-  },
 });
