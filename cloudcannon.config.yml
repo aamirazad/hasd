@@ -3,22 +3,32 @@ paths:
   uploads: public/uploads
   static: public
 collections_config:
-  pages:
-    path: ''
-    name: Pages
-    icon: wysiwyg
-    disable_url: true
+  posts:
+    path: content/posts
+    glob:
+    name:
+    singular_name:
+    icon: notes
+    url:
+    include_developer_files:
+    documentation:
+    description: ''
+    preview:
+    sort:
+    sort_options:
+    _editables:
+    _enabled_editors:
+    _inputs:
+    _select_data:
+    _structures:
+    add_options:
+    create:
     disable_add: false
     disable_add_folder: false
     disable_file_actions: false
-  src_pages_posts:
-    path: src/pages/posts
-    name: Src Pages Posts
-    icon: sports_esports
-    disable_url: false
-    disable_add: false
-    disable_add_folder: false
-    disable_file_actions: false
+    new_preview_url:
+    schemas:
+    schema_key:
 timezone: America/New_York
 markdown:
   engine: commonmark
