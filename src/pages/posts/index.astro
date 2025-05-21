@@ -1,16 +1,34 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getCollection } from "astro:content";
-const posts = await getCollection("posts");
+import { contentfulClient } from "@/lib/contentful";
+import type { BlogPost } from "@/lib/contentful";
+
+const entries = await contentfulClient.getEntries<BlogPost>({
+  content_type: "blogPost",
+});
+
+const posts = entries.items.map((item) => {
+  const { title, date, description, slug } = item.fields;
+  return {
+    title,
+    slug,
+    description,
+    date: new Date(date).toLocaleDateString(),
+  };
+});
 ---
 
-<BaseLayout className="container mx-auto max-w-prose py-8 prose" title="Posts">
-  <h1>My posts</h1>
+<BaseLayout className="prose-lg" title="Blog">
+  <h1 class="font-bold">My Blog</h1>
   <ul>
     {
       posts.map((post) => (
         <li>
-          <a href={`/posts/${post.id}`}>{post.data.title}</a>
+          <a href={`/posts/${post.slug}/`}>
+            <h2>{post.title}</h2>
+          </a>
+          <time>{post.date}</time>
+          <p>{post.description}</p>
         </li>
       ))
     }
