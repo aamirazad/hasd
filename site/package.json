@@ -1,0 +1,25 @@
+{
+  "name": "hasd",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "lint": "astro check",
+    "start": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.6",
+    "@sanity/astro": "^3.2.6",
+    "@sanity/client": "^7.3.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.7",
+    "@types/canvas-confetti": "^1.9.0",
+    "astro": "^5.7.13",
+    "astro-portabletext": "^0.11.1",
+    "sanity": "^3.89.0",
+    "styled-components": "^6.1.18",
+    "tailwindcss": "^4.1.7"
+  }
+}

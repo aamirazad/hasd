@@ -1,0 +1,30 @@
+---
+const { title } = Astro.props;
+---
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+<title>{title}</title>
+<meta name="description" content="Welcome to my new Astro site!" />
+
+<!-- Web analytics -->
+<script
+  is:inline
+  defer
+  data-domain="hasd.pages.dev"
+  src="https://plausible.aamira.me/js/script.outbound-links.js"></script>
+
+<!-- Open Graph tags -->
+<meta property="og:title" content="My New Astro Website" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://www.example.com/" />
+<meta property="og:description" content="Welcome to my new Astro site!" />
+<meta
+  property="og:image"
+  content="https://www.example.com/_astro/seo-banner.BZD7kegZ.webp"
+/>
+<meta property="og:image:alt" content="" />
+
+<!-- Helpful stuff -->
+<meta charset="utf-8" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
