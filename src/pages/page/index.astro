@@ -1,15 +1,20 @@
 ---
 import { getCollection } from "astro:content";
+import HomePageLayout from "@/layouts/HomePageLayout.astro";
 const pages = await getCollection("pages");
 ---
 
-<h1>My posts</h1>
-<ul>
-  {
-    pages.map((page) => (
-      <li>
-        <a href={`/${page.data.slug}`}>{page.data.title}</a>
-      </li>
-    ))
-  }
-</ul>
+<HomePageLayout title="Index of posts">
+  <h1>My posts</h1>
+  <ul>
+    {
+      pages.map((page) => (
+        <li class="list-inside list-disc">
+          <a class="underline" href={`/${page.data.slug}`}>
+            {page.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</HomePageLayout>

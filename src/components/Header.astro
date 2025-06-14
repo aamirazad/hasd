@@ -1,8 +1,21 @@
 ---
-
+const { pathname } = Astro.url;
+console.log(pathname);
+const menu = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "Sim",
+    url: "/sim",
+  },
+];
 ---
 
-<header class="container py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg glass">
+<header
+  class="container py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg glass sticky top-0"
+>
   <nav class="relative flex flex-wrap items-center justify-between">
     <!-- Navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
@@ -20,29 +33,26 @@
       id="nav-menu"
       class="text-center lg:text-left order-3 hidden w-full pb-6 md:order-1 md:flex md:w-auto md:space-x-2 md:pb-0 lg:space-x-4"
     >
-      <li>
-        <a
-          href="/"
-          class="block p-2 font-semibold text-gray-700 dlg:px-2 lg:py-3">Home</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#"
-          class="block p-2 font-semibold text-gray-700 lg:px-2 lg:py-3">About</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#"
-          class="block p-2 font-semibold text-gray-700 lg:px-2 lg:py-3">Docs</a
-        >
-      </li>
+      {
+        menu.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class={`block p-2 font-semibold text-gray-700 dlg:px-2 lg:py-3 ${
+                (pathname === `${item.url}/` || pathname === item.url) &&
+                "active"
+              }`}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       <a
         class="mr-4 inline-block text-xl text-gray-700"
-        href="/#"
+        href="#"
         aria-label="search"
       >
         <svg

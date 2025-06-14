@@ -1,5 +1,7 @@
 ---
 import { getCollection } from "astro:content";
+import HomePageLayout from "@/layouts/HomePageLayout.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
@@ -10,7 +12,69 @@ export async function getStaticPaths() {
 }
 // 2. For your template, you can get the entry directly from the prop
 const { page } = Astro.props;
+
+const createdDate = new Date(page.data.created);
+const updatedDate = page.data.updated ? new Date(page.data.updated) : null;
+
+const formattedCreatedDate = createdDate.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const formattedUpdatedDateTime = updatedDate
+  ? updatedDate.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    })
+  : "";
+
+// * shown if updatedDate exists and it's different from createdDate
+const showAsterisk =
+  updatedDate && updatedDate.getTime() !== createdDate.getTime();
 ---
 
-<h1>{page.data.title}</h1>
-<Fragment set:html={page.data.content} />
+<HomePageLayout title={page.data.title}>
+  <section class="flex container md:p-4 p-0">
+    <div class=`w-full md:col-9`>
+      <article class="">
+        <section>
+          <div class="glass mb-8 p-4 rounded-lg prose">
+            <h1
+              class="scroll-m-20 text-4xl font-extrabold tracking-tight text-balance text-left"
+            >
+              Header
+            </h1>
+            <ul>
+              <li>
+                {formattedCreatedDate}
+                {
+                  showAsterisk && (
+                    <span
+                      style="cursor: help; margin-left: 0.2em;"
+                      title={`Updated ${formattedUpdatedDateTime}`}
+                    >
+                      *
+                    </span>
+                  )
+                }
+              </li>
+            </ul>
+          </div>
+          <section class="content mb-4 glass px-4 rounded-lg">
+            <Fragment set:html={page.data.content} />
+          </section>
+        </section>
+      </article>
+      <div
+        class=`hidden max-h-static_sidemenu sticky top-[5rem] pl-4 md:flex md:col-3`
+      >
+        <TableOfContents />
+      </div>
+    </div>
+  </section>
+</HomePageLayout>
