@@ -8,7 +8,7 @@ const pages = await getCollection("pages");
   {
     pages.map((page) => (
       <li>
-        <a href={`/page/${page.data.slug}`}>{page.data.title}</a>
+        <a href={`/${page.data.slug}`}>{page.data.title}</a>
       </li>
     ))
   }
