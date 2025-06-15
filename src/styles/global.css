@@ -88,42 +88,6 @@ blockquote {
   @apply mt-6 border-l-2 pl-6 italic;
 }
 
-/* Table */
-table {
-  @apply w-full;
-}
-
-/* Table rows: even rows get muted background, no margin, border top, no padding */
-thead tr,
-tbody tr {
-  @apply m-0 border-t p-0;
-}
-
-tbody tr:nth-child(even) {
-  @apply bg-muted;
-}
-
-/* Table header cells */
-th {
-  @apply border px-4 py-2 text-left font-bold;
-}
-
-/* Table data cells */
-td {
-  @apply border px-4 py-2 text-left;
-}
-
-/* Alignment based on [align] attribute */
-th[align="center"],
-td[align="center"] {
-  @apply text-center;
-}
-
-th[align="right"],
-td[align="right"] {
-  @apply text-right;
-}
-
 ul {
   @apply my-6 ml-6 list-disc [&>li]:mt-2;
 }
