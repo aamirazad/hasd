@@ -29,17 +29,6 @@
   }
 }
 
-/* Bold and Strong Tags */
-b,
-strong {
-  @apply font-semibold;
-}
-
-/* Image Styles */
-img {
-  @apply mx-auto;
-}
-
 /* Link Hover Styles */
 a:hover,
 .a:hover {
@@ -55,9 +44,4 @@ input::-webkit-inner-spin-button {
 
 input[type="number"] {
   -moz-appearance: textfield;
-}
-
-/* Code Styling */
-code {
-  @apply border-none;
 }
