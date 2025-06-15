@@ -1,10 +1,13 @@
 ---
 const { pathname } = Astro.url;
-console.log(pathname);
 const menu = [
   {
     name: "Home",
     url: "/",
+  },
+  {
+    name: "About",
+    url: "/about",
   },
   {
     name: "Sim",
@@ -40,7 +43,7 @@ const menu = [
               href={item.url}
               class={`block p-2 font-semibold text-gray-700 dlg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
-                "active"
+                "underline underline-offset-3"
               }`}
             >
               {item.name}
