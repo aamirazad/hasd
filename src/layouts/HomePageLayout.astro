@@ -13,6 +13,13 @@ import Footer from "@/components/Footer.astro";
     <Head title={title} />
   </head>
   <body class="flex flex-col min-h-screen">
+    <div class="absolute top-0 left-0 mt-1 ml-2">
+      <a
+        class="opacity-0 transition-opacity 50 duration-300"
+        target="_blank"
+        href="https://db.aamira.me/_/">Edit site</a
+      >
+    </div>
     <Image
       id="bg-low"
       src={smallBackgroundImage}
