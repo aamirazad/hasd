@@ -19,6 +19,11 @@ const menu = [
 <header
   class="container py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg glass sticky top-0"
 >
+  <div x-data="{ open: false }">
+    <button @click="open = not open">Expand</button>
+
+    <span x-show="open"> Content... </span>
+  </div>
   <nav class="relative flex flex-wrap items-center justify-between">
     <!-- Navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
