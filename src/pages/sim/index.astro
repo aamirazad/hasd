@@ -5,16 +5,16 @@ const pages = await getCollection("pages");
 ---
 
 <HomePageLayout title="Index of posts">
-  <h1>Posts</h1>
-  <ul>
-    {
-      pages.map((page) => (
-        <li class="list-inside list-disc">
-          <a class="underline" href={`/${page.data.slug}`}>
-            {page.data.title}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+    <h1>Posts</h1>
+    <ul>
+        {
+            pages.map((page) => (
+                <li class="list-inside list-disc">
+                    <a class="underline" href={`/${page.data.slug}`}>
+                        {page.data.title}
+                    </a>
+                </li>
+            ))
+        }
+    </ul>
 </HomePageLayout>
