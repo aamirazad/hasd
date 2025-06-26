@@ -12,10 +12,10 @@
     "astro": "^5.7.13",
     "astro-loader-pocketbase": "^2.6.0",
     "tailwindcss": "^4.1.7",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.7"
+    "@tailwindcss/typography": "^0.5.16"
   },
   "devDependencies": {
+    "@tailwindcss/vite": "^4.1.7",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1"
   }
