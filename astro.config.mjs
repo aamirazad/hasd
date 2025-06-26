@@ -3,8 +3,6 @@ import { defineConfig, envField } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
-import alpinejs from "@astrojs/alpinejs";
-
 export default defineConfig({
   site: "https://hasd.aamira.me",
 
@@ -24,6 +22,4 @@ export default defineConfig({
       }),
     },
   },
-
-  integrations: [alpinejs()],
 });
