@@ -9,64 +9,64 @@ import Footer from "@/components/Footer.astro";
 ---
 
 <html lang="en">
-    <head>
-        <Head title={title} />
-    </head>
-    <body class="flex flex-col min-h-screen">
-        <div class="absolute top-0 left-0 mt-1 ml-2">
-            <a
-                class="opacity-0 transition-opacity 50 duration-300"
-                target="_blank"
-                href="https://db.aamira.me/_/">Edit site</a
-            >
-        </div>
-        <Image
-            id="bg-low"
-            src={smallBackgroundImage}
-            loading="eager"
-            width={1920}
-            height={1080}
-            alt="a low quality calm landscape painting background"
-            class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] h-full"
-        />
+  <head>
+    <Head title={title} />
+  </head>
+  <body class="flex flex-col min-h-screen">
+    <div class="absolute top-0 left-0 mt-1 ml-2">
+      <a
+        class="opacity-0 transition-opacity 50 duration-300"
+        target="_blank"
+        href="https://db.aamira.me/_/">Edit site</a
+      >
+    </div>
+    <Image
+      id="bg-low"
+      src={smallBackgroundImage}
+      loading="eager"
+      width={1920}
+      height={1080}
+      alt="a low quality calm landscape painting background"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] h-full"
+    />
 
-        <Image
-            id="bg-high"
-            src="https://cdn.aamira.me/bwca-day.webp"
-            alt="a high quality calm landscape painting background"
-            loading="lazy"
-            width={1920}
-            height={1080}
-            class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 h-full"
-        />
+    <Image
+      id="bg-high"
+      src="https://cdn.aamira.me/bwca-day.webp"
+      alt="a high quality calm landscape painting background"
+      loading="lazy"
+      width={1920}
+      height={1080}
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 h-full"
+    />
 
-        <script>
-            // FADE IN HIGH QUALITY IMAGE
-            // Load a low quality image quickly and then blur in the high quality image before removing the low quality one
-            const lowResDiv = document.getElementById("bg-low");
-            const highResDiv = document.getElementById("bg-high");
-            const highResImageUrl = "https://cdn.aamira.me/bwca-day.webp";
+    <script>
+      // FADE IN HIGH QUALITY IMAGE
+      // Load a low quality image quickly and then blur in the high quality image before removing the low quality one
+      const lowResDiv = document.getElementById("bg-low");
+      const highResDiv = document.getElementById("bg-high");
+      const highResImageUrl = "https://cdn.aamira.me/bwca-day.webp";
 
-            const highResImg = new Image();
-            highResImg.src = highResImageUrl;
+      const highResImg = new Image();
+      highResImg.src = highResImageUrl;
 
-            highResImg.onload = () => {
-                highResDiv?.classList.remove("opacity-0");
-                lowResDiv?.classList.add("blur-none");
-                setTimeout(() => {
-                    lowResDiv?.classList.add("hidden");
-                }, 500);
-            };
+      highResImg.onload = () => {
+        highResDiv?.classList.remove("opacity-0");
+        lowResDiv?.classList.add("blur-none");
+        setTimeout(() => {
+          lowResDiv?.classList.add("hidden");
+        }, 500);
+      };
 
-            highResImg.onerror = () => {
-                console.error("Failed to load high-resolution image.");
-            };
-        </script>
-        <!-- MAIN PAGE CONTENT -->
-        <Header />
-        <main class="flex-grow text-center mx-2 xl:mx-32 2xl:mx-82">
-            <slot />
-        </main>
-        <Footer />
-    </body>
+      highResImg.onerror = () => {
+        console.error("Failed to load high-resolution image.");
+      };
+    </script>
+    <!-- MAIN PAGE CONTENT -->
+    <Header />
+    <main class="flex-grow text-center mx-2 xl:mx-32 2xl:mx-82">
+      <slot />
+    </main>
+    <Footer />
+  </body>
 </html>

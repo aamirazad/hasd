@@ -2,16 +2,16 @@
 @import "tailwindcss";
 
 .container {
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1200px;
-    padding-left: 1rem;
-    padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 @layer components {
-    .glass {
-        @apply bg-white/20
+  .glass {
+    @apply bg-white/20
       backdrop-blur-lg
       bg-clip-padding
       backdrop-filter
@@ -20,55 +20,55 @@
       border
       border-[rgba(255,255,255,0.6)];
 
-        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
-    }
-    .link {
-        @apply underline decoration-sky-500/50 decoration-3;
-    }
-    .link:hover {
-        @apply decoration-sky-500;
-    }
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.25);
+  }
+  .link {
+    @apply underline decoration-sky-500/50 decoration-3;
+  }
+  .link:hover {
+    @apply decoration-sky-500;
+  }
 }
 
 /* Link Hover Styles */
 a:hover,
 .a:hover {
-    @apply opacity-80;
+  @apply opacity-80;
 }
 
 /* Input Styles for Number Fields (Cross-browser compatibility) */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 /* shadcn ui topography */
 
 h1 {
-    @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance mb-4;
+  @apply scroll-m-20 text-4xl font-extrabold tracking-tight text-balance mb-4;
 }
 
 h2 {
-    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 h3 {
-    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
 }
 
 h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
 }
 
 p {
-    @apply leading-7 [&:not(:first-child)]:mt-6;
+  @apply leading-7 [&:not(:first-child)]:mt-6;
 }
 
 @theme {
-    --font-sans: "Inter", sans-serif;
+  --font-sans: "Inter", sans-serif;
 }

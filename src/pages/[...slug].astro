@@ -6,11 +6,11 @@ import CalendarDays from "@/components/icons/CalendarDays.astro";
 import CircleUser from "@/components/icons/CircleUser.astro";
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
-    const pages = await getCollection("pages");
-    return pages.map((page) => ({
-        params: { slug: page.data.slug },
-        props: { page },
-    }));
+  const pages = await getCollection("pages");
+  return pages.map((page) => ({
+    params: { slug: page.data.slug },
+    props: { page },
+  }));
 }
 // 2. For your template, you can get the entry directly from the prop
 const { page } = Astro.props;
@@ -19,88 +19,82 @@ const createdDate = new Date(page.data.created);
 const updatedDate = page.data.updated ? new Date(page.data.updated) : null;
 
 const formattedCreatedDate = createdDate.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
 });
 
 const hoverCreatedDate = createdDate.toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-    hour: "numeric",
-    minute: "numeric",
-    second: "numeric",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
 });
 
 const formattedUpdateDate = updatedDate
-    ? updatedDate.toLocaleDateString(undefined, {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-          second: "numeric",
-      })
-    : "";
+  ? updatedDate.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    })
+  : "";
 
 // * shown if updatedDate exists and it's different from createdDate
 const showAsterisk =
-    updatedDate && updatedDate.getTime() !== createdDate.getTime();
+  updatedDate && updatedDate.getTime() !== createdDate.getTime();
 ---
 
 <HomePageLayout title={page.data.title}>
-    <section class="flex container md:p-4 p-0 text-left">
-        <article class="md:w-4/5">
-            <section>
-                <!-- HEADER -->
-                <div class="glass mb-6 p-4 rounded-lg prose">
-                    <h1>
-                        {page.data.title}
-                    </h1>
-                    <ul>
-                        {
-                            page.data.author && (
-                                <li class="pr-4 inline-block">
-                                    <CircleUser className="-mt-1 inline-block size-5" />
-                                    {page.data.author}
-                                </li>
-                            )
-                        }
-                        <li class="pr-4 inline-block">
-                            <CalendarDays
-                                className="-mt-1 inline-block size-5"
-                            />
-                            <span title={hoverCreatedDate}
-                                >{formattedCreatedDate}</span
-                            >
-                            {
-                                showAsterisk && (
-                                    <span
-                                        class="cursor-help absolute ml-0.5"
-                                        title={`Updated ${formattedUpdateDate}`}
-                                    >
-                                        *
-                                    </span>
-                                )
-                            }
-                        </li>
-                    </ul>
-                </div>
-                <section
-                    class="content mb-4 glass px-4 rounded-lg prose lg:prose-xl"
-                >
-                    <Fragment set:html={page.data.content} />
-                </section>
-            </section>
-        </article>
-        <div
-            class="hidden sticky top-[5rem] right-0 pl-4 md:flex md:col-3 self-start w-1/5"
-            style={{
-                height: "calc(100vh - 12.7rem)",
-            }}
-        >
-            <TableOfContents />
+  <section class="flex container md:p-4 p-0 text-left">
+    <article class="md:w-4/5">
+      <section>
+        <!-- HEADER -->
+        <div class="glass mb-6 p-4 rounded-lg prose">
+          <h1>
+            {page.data.title}
+          </h1>
+          <ul>
+            {
+              page.data.author && (
+                <li class="pr-4 inline-block">
+                  <CircleUser className="-mt-1 inline-block size-5" />
+                  {page.data.author}
+                </li>
+              )
+            }
+            <li class="pr-4 inline-block">
+              <CalendarDays className="-mt-1 inline-block size-5" />
+              <span title={hoverCreatedDate}>{formattedCreatedDate}</span>
+              {
+                showAsterisk && (
+                  <span
+                    class="cursor-help absolute ml-0.5"
+                    title={`Updated ${formattedUpdateDate}`}
+                  >
+                    *
+                  </span>
+                )
+              }
+            </li>
+          </ul>
         </div>
-    </section>
+        <section class="content mb-4 glass px-4 rounded-lg prose lg:prose-xl">
+          <Fragment set:html={page.data.content} />
+        </section>
+      </section>
+    </article>
+    <div
+      class="hidden sticky top-[5rem] right-0 pl-4 md:flex md:col-3 self-start w-1/5"
+      style={{
+        height: "calc(100vh - 12.7rem)",
+      }}
+    >
+      <TableOfContents />
+    </div>
+  </section>
 </HomePageLayout>
