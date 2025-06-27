@@ -47,15 +47,52 @@ const formattedUpdateDate = updatedDate
 // * shown if updatedDate exists and it's different from createdDate
 const showAsterisk =
   updatedDate && updatedDate.getTime() !== createdDate.getTime();
+
+import * as cheerio from "cheerio";
+
+const $ = cheerio.load(page.data.content);
+
+const slugify = (text) => {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]+/g, "")
+    .replace(/--+/g, "-")
+    .replace(/^-+/, "")
+    .replace(/-+$/, "");
+};
+
+const headings = $("h1, h2, h3, h4, h5, h6")
+  .map((i, el) => {
+    const text = $(el).text();
+    let id = $(el).attr("id");
+
+    if (!id) {
+      id = slugify(text);
+      $(el).attr("id", id); // Add the ID to the element in the Cheerio object
+    }
+
+    return {
+      text: text,
+      id: id,
+      tagName: el.tagName,
+    };
+  })
+  .get();
+
+// Get the modified HTML content with IDs added. This is the string
+// that gets rendered into the HTML sent to the browser.
+const processedContent = $.html();
 ---
 
 <HomePageLayout title={page.data.title}>
-  <section class="flex container md:p-4 p-0 text-left">
+  <section class="flex container text-left">
     <article class="md:w-4/5">
       <section>
         <!-- HEADER -->
         <div class="glass mb-6 p-4 rounded-lg prose">
-          <h1>
+          <h1 class="mb-2">
             {page.data.title}
           </h1>
           <ul>
@@ -83,18 +120,18 @@ const showAsterisk =
             </li>
           </ul>
         </div>
-        <section class="content mb-4 glass px-4 rounded-lg prose lg:prose-xl">
-          <Fragment set:html={page.data.content} />
+        <section class="content mb-4.5 glass p-4 rounded-lg">
+          <Fragment set:html={processedContent} />
         </section>
       </section>
     </article>
     <div
       class="hidden sticky top-[5rem] right-0 pl-4 md:flex md:col-3 self-start w-1/5"
       style={{
-        height: "calc(100vh - 12.7rem)",
+        height: "calc(100vh - 11.8rem)",
       }}
     >
-      <TableOfContents />
+      <TableOfContents headings={headings} />
     </div>
   </section>
 </HomePageLayout>

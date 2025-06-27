@@ -62,17 +62,16 @@ input[type="number"] {
 }
 
 /* shadcn ui topography */
-
 h1 {
-  @apply scroll-m-20 text-4xl font-semibold tracking-tight text-balance mb-4;
+  @apply scroll-m-20 text-4xl font-bold tracking-tight text-balance;
 }
 
 h2 {
-  @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply scroll-m-20 border-b pb-1 mb-3 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
 h3 {
-  @apply scroll-m-20 text-2xl font-bold tracking-tight;
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
 }
 
 h4 {
@@ -82,6 +81,7 @@ h4 {
 p {
   @apply leading-7 [&:not(:first-child)]:mt-6;
 }
+*/
 
 /* Font */
 
