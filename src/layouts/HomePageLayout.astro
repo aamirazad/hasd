@@ -27,7 +27,7 @@ import Footer from "@/components/Footer.astro";
       width={1920}
       height={1080}
       alt="a low quality calm landscape painting background"
-      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] h-full"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter ease-in-out bg-[#e8f5ea] h-full w-full"
     />
 
     <Image
@@ -38,34 +38,26 @@ import Footer from "@/components/Footer.astro";
       loading="lazy"
       width={1920}
       height={1080}
-      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 h-full"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 h-full w-full"
     />
 
-    <script>
+    <script is:inline>
       // FADE IN HIGH QUALITY IMAGE
-      // Load a low quality image quickly and then blur in the high quality image before removing the low quality one
-      const lowResDiv = document.getElementById("bg-low");
-      const highResDiv = document.getElementById("bg-high");
-      const highResImageUrl = "https://cdn.aamira.me/bwca-day.webp";
-
-      const highResImg = new Image();
-      highResImg.src = highResImageUrl;
-
-      highResImg.onload = () => {
-        highResDiv?.classList.remove("opacity-0");
-        lowResDiv?.classList.add("blur-none");
-        setTimeout(() => {
-          lowResDiv?.classList.add("hidden");
-        }, 500);
-      };
-
-      highResImg.onerror = () => {
-        console.error("Failed to load high-resolution image.");
-      };
+      document.addEventListener("DOMContentLoaded", () => {
+        const img = document.getElementById("bg-high");
+        if (img.complete) {
+          img.classList.add("opacity-100");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("opacity-100");
+          });
+        }
+      });
     </script>
+
     <!-- MAIN PAGE CONTENT -->
     <Header />
-    <main class="flex-grow text-center mx-2 xl:mx-32 2xl:mx-82">
+    <main class="container flex-grow text-center flex flex-col">
       <slot />
     </main>
     <Footer />
