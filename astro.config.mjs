@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 
 import tailwindcss from "@tailwindcss/vite";
 
@@ -8,5 +8,18 @@ export default defineConfig({
 
   vite: {
     plugins: [tailwindcss()],
+  },
+
+  env: {
+    schema: {
+      POCKETBASE_SUPER_EMAIL: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+      POCKETBASE_SUPER_PASSWORD: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
   },
 });

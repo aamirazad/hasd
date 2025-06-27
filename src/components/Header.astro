@@ -1,8 +1,24 @@
 ---
-
+const { pathname } = Astro.url;
+const menu = [
+  {
+    name: "Home",
+    url: "/",
+  },
+  {
+    name: "About",
+    url: "/about",
+  },
+  {
+    name: "Sim",
+    url: "/sim",
+  },
+];
 ---
 
-<header class="container py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg glass">
+<header
+  class="container py-2 z-30 mb-4 lg:mt-4 lg:rounded-lg sticky top-0 glass"
+>
   <nav class="relative flex flex-wrap items-center justify-between">
     <!-- Navbar toggler -->
     <input id="nav-toggle" type="checkbox" class="hidden" />
@@ -16,33 +32,101 @@
       </svg>
     </label>
     <!-- /Navbar toggler -->
+    <!-- Desktop links -->
     <ul
       id="nav-menu"
       class="text-center lg:text-left order-3 hidden w-full pb-6 md:order-1 md:flex md:w-auto md:space-x-2 md:pb-0 lg:space-x-4"
     >
-      <li>
-        <a
-          href="/"
-          class="block p-2 font-semibold text-gray-700 dlg:px-2 lg:py-3">Home</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#"
-          class="block p-2 font-semibold text-gray-700 lg:px-2 lg:py-3">About</a
-        >
-      </li>
-      <li>
-        <a
-          href="/#"
-          class="block p-2 font-semibold text-gray-700 lg:px-2 lg:py-3">Docs</a
-        >
-      </li>
+      {
+        menu.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class={`block p-2 font-normal text-gray-700 dlg:px-2 lg:py-3 ${
+                (pathname === `${item.url}/` || pathname === item.url) &&
+                "underline underline-offset-3"
+              }`}
+              data-text={item.name}
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
     </ul>
+
+    <!-- Mobile links -->
+    <ul
+      id="nav-menu-mobile"
+      class="glass absolute left-0 top-full z-40 shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg border-t border-gray-200 min-w-[10rem] w-auto mt-3 bg-[#b8e6f0]/95 opacity-0"
+    >
+      {
+        menu.map((item) => (
+          <li>
+            <a
+              href={item.url}
+              class={`block px-4 py-2 font-semibold text-gray-700 dlg:px-2 lg:py-3 ${
+                (pathname === `${item.url}/` || pathname === item.url) &&
+                "underline underline-offset-3"
+              }`}
+              onclick="document.getElementById('nav-toggle').checked = false;"
+            >
+              {item.name}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <style>
+      nav {
+        position: relative;
+      }
+      #nav-menu-mobile {
+        transition:
+          max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 0.2s;
+      }
+      #nav-toggle:checked ~ #nav-menu-mobile {
+        max-height: 500px;
+        pointer-events: auto;
+        opacity: 1;
+      }
+      @media (min-width: 768px) {
+        #nav-menu-mobile {
+          display: none !important;
+        }
+      }
+    </style>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
+    ></script> -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const navToggle = document.getElementById("nav-toggle");
+        const menu = document.getElementById("nav-menu-mobile");
+
+        // Close menu on link click
+        if (menu && navToggle instanceof HTMLInputElement) {
+          menu.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", () => {
+              navToggle.checked = false;
+            });
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener("click", (event) => {
+            const header = document.querySelector("header");
+            const target = event.target as Node;
+            if (header && !header.contains(target) && navToggle.checked) {
+              navToggle.checked = false;
+            }
+          });
+        }
+      });
+    </script>
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       <a
         class="mr-4 inline-block text-xl text-gray-700"
-        href="/#"
+        href="#"
         aria-label="search"
       >
         <svg

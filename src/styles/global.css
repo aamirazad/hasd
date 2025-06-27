@@ -7,10 +7,25 @@
   padding-left: 1rem;
   padding-right: 1rem;
 }
+/* Style scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+  position: absolute; /* Doesn't affect layout */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
 
 @layer components {
   .glass {
-    @apply bg-white/20
+    @apply bg-white/25
       backdrop-blur-lg
       bg-clip-padding
       backdrop-filter
@@ -27,17 +42,6 @@
   .link:hover {
     @apply decoration-sky-500;
   }
-}
-
-/* Bold and Strong Tags */
-b,
-strong {
-  @apply font-semibold;
-}
-
-/* Image Styles */
-img {
-  @apply mx-auto;
 }
 
 /* Link Hover Styles */
@@ -57,7 +61,45 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* Code Styling */
-code {
-  @apply border-none;
+/* shadcn ui topography */
+h1 {
+  @apply scroll-m-20 text-4xl font-bold tracking-tight text-balance;
+}
+
+h2 {
+  @apply scroll-m-20 border-b pb-1 mb-3 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+h3 {
+  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+h4 {
+  @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+*/
+
+/* Font */
+
+/* latin */
+@font-face {
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 500;
+  font-stretch: 100%;
+  src:
+    url(/fonts/montserrat-latin-500-normal.woff2) format("woff2"),
+    url(/fonts/montserrat-latin-500-normal.woff) format("woff");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+    U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212,
+    U+2215, U+FEFF, U+FFFD;
+}
+
+@theme {
+  --font-sans: "Montserrat", sans-serif;
 }

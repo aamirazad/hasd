@@ -1,19 +1,25 @@
 ---
-import Head from "../components/Head.astro";
+import Head from "@/components/Head.astro";
 const { title } = Astro.props;
-import "../styles/global.css";
+import "@/styles/global.css";
 import { Image } from "astro:assets";
-import smallBackgroundImage from "../assets/bwca-day-small.webp";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import smallBackgroundImage from "@/assets/bwca-day-small.webp";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
 ---
 
 <html lang="en">
   <head>
     <Head title={title} />
-    <!-- <link rel="preload" as="image" href={smallBackgroundImage.src}/> -->
   </head>
   <body class="flex flex-col min-h-screen">
+    <div class="absolute top-0 left-0 mt-1 ml-2">
+      <a
+        class="opacity-0 transition-opacity 50 duration-300"
+        target="_blank"
+        href="https://db.aamira.me/_/">Edit site</a
+      >
+    </div>
     <Image
       id="bg-low"
       src={smallBackgroundImage}
@@ -21,44 +27,37 @@ import Footer from "../components/Footer.astro";
       width={1920}
       height={1080}
       alt="a low quality calm landscape painting background"
-      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea]"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter ease-in-out bg-[#e8f5ea] h-full w-full"
     />
 
     <Image
+      transition:persist
       id="bg-high"
       src="https://cdn.aamira.me/bwca-day.webp"
       alt="a high quality calm landscape painting background"
       loading="lazy"
       width={1920}
       height={1080}
-      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0"
+      class="fixed inset-0 z-[-10] pointer-events-none object-cover transition-filter duration-500 ease-in-out bg-[#e8f5ea] opacity-0 h-full w-full"
     />
 
-    <script>
+    <script is:inline>
       // FADE IN HIGH QUALITY IMAGE
-      // Load a low quality image quickly and then blur in the high quality image before removing the low quality one
-      const lowResDiv = document.getElementById("bg-low");
-      const highResDiv = document.getElementById("bg-high");
-      const highResImageUrl = "https://cdn.aamira.me/bwca-day.webp";
-
-      const highResImg = new Image();
-      highResImg.src = highResImageUrl;
-
-      highResImg.onload = () => {
-        highResDiv?.classList.remove("opacity-0");
-        lowResDiv?.classList.add("blur-none");
-        setTimeout(() => {
-          lowResDiv?.classList.add("hidden");
-        }, 500);
-      };
-
-      highResImg.onerror = () => {
-        console.error("Failed to load high-resolution image.");
-      };
+      document.addEventListener("DOMContentLoaded", () => {
+        const img = document.getElementById("bg-high");
+        if (img.complete) {
+          img.classList.add("opacity-100");
+        } else {
+          img.addEventListener("load", () => {
+            img.classList.add("opacity-100");
+          });
+        }
+      });
     </script>
+
     <!-- MAIN PAGE CONTENT -->
     <Header />
-    <main class="flex-grow">
+    <main class="container flex-grow text-center flex flex-col">
       <slot />
     </main>
     <Footer />
