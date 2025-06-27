@@ -58,7 +58,7 @@ const menu = [
     <!-- Mobile links -->
     <ul
       id="nav-menu-mobile"
-      class="glass absolute left-0 top-full z-40 shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg border-t border-gray-200 min-w-[10rem] w-auto mt-3 bg-[#b8e6f0]/95"
+      class="glass absolute left-0 top-full z-40 shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg border-t border-gray-200 min-w-[10rem] w-auto mt-3 bg-[#b8e6f0]/95 opacity-0"
     >
       {
         menu.map((item) => (
@@ -89,6 +89,7 @@ const menu = [
       #nav-toggle:checked ~ #nav-menu-mobile {
         max-height: 500px;
         pointer-events: auto;
+        opacity: 1;
       }
       @media (min-width: 768px) {
         #nav-menu-mobile {
@@ -99,49 +100,25 @@ const menu = [
     <!-- <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"
     ></script> -->
     <script>
-      declare var gsap: any;
       document.addEventListener("DOMContentLoaded", () => {
         const navToggle = document.getElementById("nav-toggle");
         const menu = document.getElementById("nav-menu-mobile");
-        const items = menu?.querySelectorAll("li");
 
-        navToggle?.addEventListener("change", () => {
-          if (
-            navToggle instanceof HTMLInputElement &&
-            navToggle.checked &&
-            typeof gsap !== "undefined" &&
-            items
-          ) {
-            gsap.set(items, { opacity: 0, y: -20 });
-            gsap.to(items, {
-              opacity: 1,
-              y: 0,
-              duration: 0.35,
-              stagger: 0.12,
-              ease: "power2.out",
-              overwrite: true,
-            });
-          } else if (
-            navToggle instanceof HTMLInputElement &&
-            !navToggle.checked &&
-            typeof gsap !== "undefined" &&
-            items
-          ) {
-            gsap.to(items, {
-              opacity: 0,
-              y: -20,
-              duration: 0.18,
-              stagger: { each: 0.05, from: "end" },
-              overwrite: true,
-            });
-          }
-        });
         // Close menu on link click
         if (menu && navToggle instanceof HTMLInputElement) {
           menu.querySelectorAll("a").forEach((link) => {
             link.addEventListener("click", () => {
               navToggle.checked = false;
             });
+          });
+
+          // Close menu when clicking outside
+          document.addEventListener("click", (event) => {
+            const header = document.querySelector("header");
+            const target = event.target as Node;
+            if (header && !header.contains(target) && navToggle.checked) {
+              navToggle.checked = false;
+            }
           });
         }
       });
