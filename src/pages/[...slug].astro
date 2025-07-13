@@ -1,9 +1,8 @@
 ---
 import { getCollection } from "astro:content";
-import HomePageLayout from "@/layouts/HomePageLayout.astro";
-import TableOfContents from "@/components/TableOfContents.astro";
-import CalendarDays from "@/components/icons/CalendarDays.astro";
-import CircleUser from "@/components/icons/CircleUser.astro";
+import PostLayout from "@/layouts/PostLayout.astro";
+import * as cheerio from "cheerio";
+
 // 1. Generate a new path for every collection entry
 export async function getStaticPaths() {
   const pages = await getCollection("pages");
@@ -12,43 +11,9 @@ export async function getStaticPaths() {
     props: { page },
   }));
 }
+
 // 2. For your template, you can get the entry directly from the prop
 const { page } = Astro.props;
-
-const createdDate = new Date(page.data.created);
-const updatedDate = page.data.updated ? new Date(page.data.updated) : null;
-
-const formattedCreatedDate = createdDate.toLocaleDateString(undefined, {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-});
-
-const hoverCreatedDate = createdDate.toLocaleDateString(undefined, {
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  second: "numeric",
-});
-
-const formattedUpdateDate = updatedDate
-  ? updatedDate.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-      second: "numeric",
-    })
-  : "";
-
-// * shown if updatedDate exists and it's different from createdDate
-const showAsterisk =
-  updatedDate && updatedDate.getTime() !== createdDate.getTime();
-
-import * as cheerio from "cheerio";
 
 const $ = cheerio.load(page.data.content);
 
@@ -63,75 +28,41 @@ const slugify = (text) => {
     .replace(/-+$/, "");
 };
 
-const headings = $("h1, h2, h3, h4, h5, h6")
-  .map((i, el) => {
-    const text = $(el).text();
-    let id = $(el).attr("id");
+// Add the page title as the first heading
+const pageHeading = {
+  text: page.data.title,
+  id: slugify(page.data.title),
+  tagName: "h1",
+};
 
-    if (!id) {
-      id = slugify(text);
-      $(el).attr("id", id); // Add the ID to the element in the Cheerio object
-    }
+const headings = [
+  pageHeading,
+  ...$("h1, h2, h3, h4, h5, h6")
+    .map((i, el) => {
+      const text = $(el).text();
+      let id = $(el).attr("id");
 
-    return {
-      text: text,
-      id: id,
-      tagName: el.tagName,
-    };
-  })
-  .get();
+      if (!id) {
+        id = slugify(text);
+        $(el).attr("id", id); // Add the ID to the element in the Cheerio object
+      }
+
+      return {
+        text: text,
+        id: id,
+        tagName: el.tagName,
+      };
+    })
+    .get(),
+];
 
 // Get the modified HTML content with IDs added. This is the string
 // that gets rendered into the HTML sent to the browser.
 const processedContent = $.html();
 ---
 
-<HomePageLayout title={page.data.title}>
-  <section class="flex container text-left">
-    <article class="md:w-4/5">
-      <section>
-        <!-- HEADER -->
-        <div class="glass mb-6 p-4 rounded-lg prose">
-          <h1 class="mb-2">
-            {page.data.title}
-          </h1>
-          <ul>
-            {
-              page.data.author && (
-                <li class="pr-4 inline-block">
-                  <CircleUser className="-mt-1 inline-block size-5" />
-                  {page.data.author}
-                </li>
-              )
-            }
-            <li class="pr-4 inline-block">
-              <CalendarDays className="-mt-1 inline-block size-5" />
-              <span title={hoverCreatedDate}>{formattedCreatedDate}</span>
-              {
-                showAsterisk && (
-                  <span
-                    class="cursor-help absolute ml-0.5"
-                    title={`Updated ${formattedUpdateDate}`}
-                  >
-                    *
-                  </span>
-                )
-              }
-            </li>
-          </ul>
-        </div>
-        <section class="content mb-4.5 glass p-4 rounded-lg">
-          <Fragment set:html={processedContent} />
-        </section>
-      </section>
-    </article>
-    <div
-      class="hidden sticky top-[5rem] right-0 pl-4 md:flex md:col-3 self-start w-1/5"
-      style={{
-        height: "calc(100vh - 11.8rem)",
-      }}
-    >
-      <TableOfContents headings={headings} />
-    </div>
-  </section>
-</HomePageLayout>
+<PostLayout
+  page={page}
+  headings={headings}
+  processedContent={processedContent}
+/>

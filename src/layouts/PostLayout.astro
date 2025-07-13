@@ -1,0 +1,93 @@
+---
+import HomePageLayout from "@/layouts/HomePageLayout.astro";
+import TableOfContents from "@/components/TableOfContents.astro";
+import CalendarDays from "@/components/icons/CalendarDays.astro";
+import CircleUser from "@/components/icons/CircleUser.astro";
+
+const { page, headings, processedContent } = Astro.props;
+
+const createdDate = new Date(page.data.created);
+const updatedDate = page.data.updated ? new Date(page.data.updated) : null;
+
+const formattedCreatedDate = createdDate.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+
+const hoverCreatedDate = createdDate.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
+});
+
+const formattedUpdateDate = updatedDate
+  ? updatedDate.toLocaleDateString(undefined, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+    })
+  : "";
+
+// * shown if updatedDate exists and it's different from createdDate
+const showAsterisk =
+  updatedDate && updatedDate.getTime() !== createdDate.getTime();
+---
+
+<HomePageLayout title={page.data.title}>
+  <section class="flex text-left flex-col lg:flex-row gap-4 lg:gap-0">
+    <article class="w-full lg:w-4/5">
+      <section>
+        <!-- HEADER -->
+        <div class="glass mb-4 lg:mb-6 p-3 lg:p-4 rounded-lg">
+          <h1 class="mb-2 text-2xl lg:text-4xl font-bold">
+            {page.data.title}
+          </h1>
+          <ul class="flex flex-wrap gap-2 lg:gap-0 text-sm lg:text-base">
+            {
+              page.data.author && (
+                <li class="pr-2 lg:pr-4 flex items-center">
+                  <CircleUser className="inline-block size-4 lg:size-5 mr-1" />
+                  <span>{page.data.author}</span>
+                </li>
+              )
+            }
+            <li class="pr-2 lg:pr-4 flex items-center">
+              <CalendarDays className="inline-block size-4 lg:size-5 mr-1" />
+              <span title={hoverCreatedDate}>{formattedCreatedDate}</span>
+              {
+                showAsterisk && (
+                  <span
+                    class="cursor-help ml-0.5"
+                    title={`Updated ${formattedUpdateDate}`}
+                  >
+                    *
+                  </span>
+                )
+              }
+            </li>
+          </ul>
+        </div>
+        <section
+          class="content mb-20 lg:mb-6 glass p-3 lg:p-4 rounded-lg prose prose-sm lg:prose-base max-w-none prose-headings:font-bold prose-h1:text-xl lg:prose-h1:text-3xl prose-h2:text-lg lg:prose-h2:text-2xl prose-h3:text-base lg:prose-h3:text-xl"
+        >
+          <Fragment set:html={processedContent} />
+        </section>
+      </section>
+    </article>
+    <div
+      class="hidden lg:block w-1/5 lg:sticky lg:top-[5rem] lg:right-0 lg:pl-4 lg:self-start"
+      style={{
+        height: "calc(100vh - 11.8rem)",
+      }}
+    >
+      <TableOfContents headings={headings} />
+    </div>
+  </section>
+</HomePageLayout>
