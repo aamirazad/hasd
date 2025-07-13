@@ -24,7 +24,7 @@ const menu = [
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
-      class="order-0 cursor-pointer flex items-center md:hidden text-gray-700 lg:order-1"
+      class="order-0 cursor-pointer flex items-center md:hidden text-forest hover:text-pine transition-colors lg:order-1"
     >
       <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
         <title>Menu Open</title>
@@ -42,9 +42,9 @@ const menu = [
           <li>
             <a
               href={item.url}
-              class={`block p-2 font-normal text-gray-700 dlg:px-2 lg:py-3 ${
+              class={`block p-2 font-normal text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
-                "underline underline-offset-3"
+                "underline underline-offset-3 decoration-lake"
               }`}
               data-text={item.name}
             >
@@ -58,16 +58,16 @@ const menu = [
     <!-- Mobile links -->
     <ul
       id="nav-menu-mobile"
-      class="glass absolute left-0 top-full z-40 shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg border-t border-gray-200 min-w-[10rem] w-auto mt-3 bg-[#b8e6f0]/95 opacity-0"
+      class="glass absolute left-0 top-full z-40 shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg min-w-[10rem] w-auto mt-3 bg-mist/90 backdrop-blur-md opacity-0"
     >
       {
         menu.map((item) => (
           <li>
             <a
               href={item.url}
-              class={`block px-4 py-2 font-semibold text-gray-700 dlg:px-2 lg:py-3 ${
+              class={`block px-4 py-2 font-semibold text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
                 (pathname === `${item.url}/` || pathname === item.url) &&
-                "underline underline-offset-3"
+                "underline underline-offset-3 decoration-lake"
               }`}
               onclick="document.getElementById('nav-toggle').checked = false;"
             >
@@ -125,7 +125,7 @@ const menu = [
     </script>
     <div class="order-1 ml-auto flex items-center md:order-2 lg:ml-0">
       <a
-        class="mr-4 inline-block text-xl text-gray-700"
+        class="mr-4 inline-block text-xl text-forest hover:text-pine transition-colors"
         href="#"
         aria-label="search"
       >
