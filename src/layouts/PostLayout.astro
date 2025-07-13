@@ -1,5 +1,5 @@
 ---
-import HomePageLayout from "@/layouts/HomePageLayout.astro";
+import ReadingWidthLayout from "@/layouts/ReadingWidthLayout.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import CalendarDays from "@/components/icons/CalendarDays.astro";
 import CircleUser from "@/components/icons/CircleUser.astro";
@@ -40,7 +40,7 @@ const showAsterisk =
   updatedDate && updatedDate.getTime() !== createdDate.getTime();
 ---
 
-<HomePageLayout title={page.data.title}>
+<ReadingWidthLayout title={page.data.title}>
   <section class="flex text-left flex-col lg:flex-row gap-4 lg:gap-0">
     <article class="w-full lg:w-4/5">
       <section>
@@ -90,4 +90,4 @@ const showAsterisk =
       <TableOfContents headings={headings} />
     </div>
   </section>
-</HomePageLayout>
+</ReadingWidthLayout>

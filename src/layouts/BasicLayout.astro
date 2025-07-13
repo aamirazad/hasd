@@ -13,12 +13,26 @@ import Footer from "@/components/Footer.astro";
     <Head title={title} />
   </head>
   <body class="flex flex-col min-h-screen">
-    <div class="absolute top-0 left-0 mt-1 ml-2">
-      <a
-        class="opacity-0 transition-opacity 50 duration-300"
-        target="_blank"
-        href="https://db.aamira.me/_/">Edit site</a
-      >
+    <div
+      class="absolute top-0 left-0 mt-1 ml-2 opacity-0 transition-opacity hover:opacity-100 duration-300 flex gap-2 items-center"
+    >
+      <a class="" target="_blank" href="https://db.aamira.me/_/">Edit site</a>
+      <a class="" target="_blank" href="https://school.aamira.me/hasd-refresh">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-rotate-cw-icon lucide-rotate-cw"
+          ><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"
+          ></path><path d="M21 3v5h-5"></path></svg
+        >
+      </a>
     </div>
     <Image
       id="bg-low"
@@ -57,9 +71,7 @@ import Footer from "@/components/Footer.astro";
 
     <!-- MAIN PAGE CONTENT -->
     <Header />
-    <main role="main" class="container flex-grow text-center flex flex-col">
-      <slot />
-    </main>
+    <slot />
     <Footer />
   </body>
 </html>

@@ -1,82 +1,478 @@
 ---
-import HomePageLayout from "@/layouts/HomePageLayout.astro";
+import BasicLayout from "@/layouts/BasicLayout.astro";
 ---
 
-<HomePageLayout title="404">
-  <div
-    class="flex flex-col items-center justify-center min-h-[70vh] text-center px-4"
-  >
-    <div class="mb-8 max-w-md mx-auto">
-      <div id="error-number" class="text-8xl font-bold text-forest mb-6">
-        404
+<BasicLayout title="404">
+  <div class="main">
+    <section class="home">
+      <div class="home__container">
+        <div class="home__data">
+          <h3 class="home__subtitle">Unknown Zone</h3>
+          <h1 class="home__title">ERROR 404</h1>
+          <p class="home__description">
+            We can't seem to find the page you're looking for, you need to come
+            back to earth.
+          </p>
+          <a href="#" class="home__button">Return To Earth</a>
+        </div>
+
+        <div class="home__images">
+          <div class="home__blob-1">
+            <img
+              src="https://cdn.aamira.me/spacecraft.png"
+              alt="image"
+              class="home__img-1"
+            />
+          </div>
+
+          <div class="home__blob-2">
+            <img
+              src="https://cdn.aamira.me/planet-1.png"
+              alt="image"
+              class="home__img-2"
+            />
+          </div>
+
+          <div class="home__blob-3">
+            <img
+              src="https://cdn.aamira.me/planet-2.png"
+              alt="image"
+              class="home__img-3"
+            />
+          </div>
+
+          <div class="home__blob-4">
+            <img
+              src="https://cdn.aamira.me/astronaut.png"
+              alt="image"
+              class="home__img-4"
+            />
+          </div>
+
+          <img
+            src="https://cdn.aamira.me/ufo.png"
+            alt="image"
+            class="home__img-5"
+          />
+        </div>
       </div>
-
-      <h1 id="error-title" class="text-3xl font-bold text-green-800 mb-4">
-        Page Not Found
-      </h1>
-
-      <p id="error-message" class="text-gray-700 text-lg">
-        The page you're looking for doesn't exist or was moved.
-      </p>
-    </div>
-
-    <a
-      id="home-button"
-      href="/"
-      class="px-8 py-3 bg-green-700 text-white rounded-xl hover:bg-green-900 transition-all duration-200 font-medium shadow-lg"
-    >
-      ← Go Back Home
-    </a>
+    </section>
   </div>
-  <script>
-    import { gsap } from "gsap";
 
-    document.addEventListener("astro:page-load", () => {
-      const tl = gsap.timeline();
+  <style>
+    /*=============== GOOGLE FONTS ===============*/
+    @import url(https://fonts.bunny.net/css?family=space-grotesk:700);
+    /*=============== VARIABLES CSS ===============*/
+    :root {
+      --header-height: 56px;
 
-      // Set initial states
-      gsap.set("#error-number", { scale: 0, rotation: -180 });
-      gsap.set("#error-title", { y: 50, opacity: 0 });
-      gsap.set("#error-message", { y: 30, opacity: 0 });
-      gsap.set("#home-button", { y: 20, opacity: 0 });
+      /*========== Colors ==========*/
+      --white-color: #f5f5f5;
+      --black-color: #000000;
 
-      // Animation sequence
-      tl.to("#error-number", {
-        scale: 1,
-        rotation: 0,
-        duration: 0.6,
-        ease: "back.out(1.7)",
-      })
-        .to(
-          "#error-title",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        )
-        .to(
-          "#error-message",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.out",
-          },
-          "-=0.4",
-        )
-        .to(
-          "#home-button",
-          {
-            y: 0,
-            opacity: 1,
-            duration: 0.3,
-            ease: "power2.out",
-          },
-          "-=0.3",
-        );
-    });
-  </script>
-</HomePageLayout>
+      /*========== Font and typography ==========*/
+      --body-font: "Space Grotesk", sans-serif;
+      --biggest-font-size: 48px;
+      --normal-font-size: 15px;
+
+      /*========== Font weight ==========*/
+      --font-bold: 700;
+
+      /*========== z index ==========*/
+      --z-tooltip: 10;
+      --z-fixed: 100;
+    }
+
+    /*========== Responsive typography ==========*/
+    @media screen and (min-width: 1150px) {
+      :root {
+        --biggest-font-size: 104px;
+        --big-font-size: 32px;
+        --normal-font-size: 16px;
+      }
+    }
+
+    /*=============== BASE ===============*/
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    .main {
+      font-family: var(--body-font);
+      font-size: var(--normal-font-size);
+      color: var(--black-color);
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    /*=============== REUSABLE CSS CLASSES ===============*/
+    .container {
+      max-width: 1120px;
+      margin-inline: auto;
+    }
+
+    .main {
+      overflow: hidden;
+    }
+
+    /*=============== HEADER & NAV ===============*/
+    .header {
+      position: fixed;
+      width: 100%;
+      top: 0;
+      left: 0;
+      background-color: var(--white-color);
+      z-index: var(--z-fixed);
+      transition: box-shadow 0.4s;
+    }
+
+    .nav {
+      position: relative;
+      height: var(--header-height);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav__logo {
+      color: var(--black-color);
+      font-weight: var(--font-bold);
+    }
+
+    /* Show menu */
+    .show-menu {
+      top: 0;
+    }
+
+    /* Add shadow header */
+    .shadow-header {
+      box-shadow: 0 2px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    /*=============== HOME ===============*/
+    .home__container {
+      height: 100vh;
+      display: grid;
+      grid-template-rows: max-content 320px;
+      row-gap: 32px;
+    }
+
+    .home__data {
+      text-align: center;
+    }
+
+    .home__subtitle {
+      font-size: var(--normal-font-size);
+      margin-bottom: 8px;
+    }
+
+    .home__title {
+      font-size: var(--biggest-font-size);
+      -webkit-text-stroke: 5px var(--black-color);
+      color: var(--white-color);
+      paint-order: stroke;
+      filter: drop-shadow(-4px 4px 0 var(--black-color));
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .home__description {
+      padding-inline: 1rem;
+      margin-bottom: 32px;
+    }
+
+    .home__button {
+      display: inline-flex;
+      background-color: var(--black-color);
+      color: var(--white-color);
+      font-weight: var(--font-bold);
+      padding: 16px 24px;
+      transition: box-shadow 0.4s;
+      cursor: pointer;
+    }
+
+    .home__button:hover {
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .home__images {
+      position: relative;
+    }
+
+    .home__images [class*="home__blob"] {
+      background-color: var(--black-color);
+      position: absolute;
+    }
+
+    .home__images [class*="home__img"] {
+      position: absolute;
+    }
+
+    .home__blob-1 {
+      width: 150px;
+      height: 180px;
+      border-radius: 38% 62% 66% 34%/60% 41% 59% 40%;
+      top: -32px;
+      left: -64px;
+      animation: blob-1 4s linear infinite;
+    }
+    .home__img-1 {
+      width: 100px;
+      top: 12px;
+      right: 16px;
+    }
+
+    .home__blob-2 {
+      width: 200px;
+      height: 195px;
+      border-radius: 59% 41% 19% 81%/34% 72% 28% 66%;
+      top: -128px;
+      right: -132px;
+      animation: blob-2 4s linear infinite;
+    }
+    .home__img-2 {
+      width: 120px;
+      bottom: 80px;
+      left: 0;
+    }
+
+    .home__blob-3 {
+      width: 200px;
+      height: 190px;
+      border-radius: 57% 43% 40% 60%/49% 34% 66% 51%;
+      left: -80px;
+      bottom: -72px;
+      animation: blob-3 4s linear infinite;
+    }
+    .home__img-3 {
+      width: 100px;
+      top: 16px;
+      right: 32px;
+    }
+
+    .home__blob-4 {
+      width: 300px;
+      height: 290px;
+      border-radius: 78% 22% 20% 80%/53% 46% 54% 47%;
+      right: -144px;
+      bottom: -64px;
+      animation: blob-4 4s linear infinite;
+    }
+    .home__img-4 {
+      width: 200px;
+      left: -16px;
+      bottom: 16px;
+    }
+
+    .home__img-5 {
+      width: 150px;
+      left: 0;
+      right: -64px;
+      margin: 0 auto;
+      top: 16px;
+      rotate: 15deg;
+      z-index: -1;
+    }
+
+    /* Animate blobs */
+    @keyframes blob-1 {
+      0%,
+      100% {
+        border-radius: 38% 62% 66% 34%/60% 41% 59% 40%;
+      }
+      33% {
+        border-radius: 59% 41% 55% 45%/64% 22% 78% 36%;
+      }
+      66% {
+        border-radius: 59% 41% 35% 65%/46% 67% 33% 54%;
+      }
+    }
+
+    @keyframes blob-2 {
+      0%,
+      100% {
+        border-radius: 59% 41% 19% 81%/34% 72% 28% 66%;
+      }
+      33% {
+        border-radius: 78% 22% 20% 80%/53% 46% 54% 47%;
+      }
+      66% {
+        border-radius: 57% 43% 40% 60%/49% 34% 66% 51%;
+      }
+    }
+
+    @keyframes blob-3 {
+      0%,
+      100% {
+        border-radius: 57% 43% 40% 60%/49% 34% 66% 51%;
+      }
+      33% {
+        border-radius: 51% 49% 30% 70%/37% 63% 37% 63%;
+      }
+      66% {
+        border-radius: 51% 49% 28% 72%/77% 75% 25% 23%;
+      }
+    }
+
+    @keyframes blob-4 {
+      0%,
+      100% {
+        border-radius: 78% 22% 20% 80%/53% 46% 54% 47%;
+      }
+      33% {
+        border-radius: 65% 35% 42% 58%/64% 28% 72% 36%;
+      }
+      66% {
+        border-radius: 32% 68% 46% 54%/29% 22% 78% 71%;
+      }
+    }
+
+    /*=============== BREAKPOINTS ===============*/
+    /* For small devices */
+    @media screen and (max-width: 320px) {
+      .container {
+        margin-inline: 1rem;
+      }
+
+      .home__container {
+        grid-template-rows: max-content 265px;
+      }
+      .home__images [class*="home__blob"],
+      .home__img-5 {
+        scale: 0.7;
+      }
+      .home__title {
+        font-size: 32px;
+      }
+      .home__description {
+        padding: 0;
+      }
+    }
+
+    @media screen and (max-width: 400px) and (max-height: 650px) {
+      .home__container {
+        height: initial;
+      }
+    }
+
+    @media screen and (min-width: 400px) and (max-height: 700px) {
+      .home__container {
+        height: initial;
+      }
+    }
+
+    /* For medium devices */
+    @media screen and (min-width: 540px) {
+      .home__container {
+        grid-template-columns: 400px;
+        justify-content: center;
+        padding-top: 4rem;
+      }
+    }
+
+    /* For large devices */
+    @media screen and (min-width: 1150px) {
+      .container {
+        margin-inline: auto;
+      }
+
+      .nav {
+        height: calc(var(--header-height) + 32px);
+      }
+
+      .home__container {
+        grid-template-columns: 1fr;
+        padding-top: 6rem;
+      }
+      .home__subtitle {
+        font-size: var(--big-font-size);
+      }
+      .home__title {
+        -webkit-text-stroke-width: 8px;
+        filter: drop-shadow(-8px 8px 0 var(--black-color));
+      }
+      .home__description {
+        width: 480px;
+        margin: 0 auto 56px;
+        padding-inline: 0;
+      }
+
+      .home__blob-1 {
+        width: 220px;
+        height: 260px;
+        top: -320px;
+        left: -16px;
+      }
+      .home__img-1 {
+        width: 180px;
+      }
+
+      .home__blob-2 {
+        width: 360px;
+        height: 355px;
+        top: -432px;
+      }
+      .home__img-2 {
+        width: 280px;
+      }
+
+      .home__blob-3 {
+        width: 500px;
+        height: 485px;
+        bottom: -176px;
+      }
+      .home__img-3 {
+        width: 250px;
+        top: 48px;
+        left: 0;
+        right: 0;
+        margin-inline: auto;
+      }
+
+      .home__blob-4 {
+        width: 500px;
+        height: 485px;
+        right: -112px;
+        bottom: -192px;
+      }
+      .home__img-4 {
+        width: 450px;
+        left: -32px;
+        bottom: 48px;
+      }
+
+      .home__img-5 {
+        width: 250px;
+        right: 0;
+        top: 144px;
+      }
+    }
+
+    /* For taller devices */
+    @media screen and (min-width: 390px) and (min-height: 900px) {
+      .home__container {
+        padding-top: 4rem;
+      }
+    }
+
+    @media screen and (min-width: 800px) and (min-height: 1200px) {
+      .home__container {
+        padding-top: 8rem;
+      }
+    }
+  </style>
+</BasicLayout>

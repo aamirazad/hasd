@@ -1,0 +1,10 @@
+---
+import BasicLayout from "@/layouts/BasicLayout.astro";
+const { title } = Astro.props;
+---
+
+<BasicLayout title={title}>
+  <main role="main" class="container flex-grow text-center flex flex-col">
+    <slot />
+  </main>
+</BasicLayout>
