@@ -42,12 +42,31 @@
   .link:hover {
     @apply decoration-sky-500;
   }
-}
+  /* shadcn ui topography */
+  h1 {
+    @apply scroll-m-20 text-4xl font-bold tracking-tight text-balance;
+  }
 
-/* Link Hover Styles */
-a:hover,
-.a:hover {
-  @apply opacity-80;
+  h2 {
+    @apply scroll-m-20 border-b pb-1 mb-3 text-3xl font-semibold tracking-tight first:mt-0;
+  }
+
+  h3 {
+    @apply scroll-m-20 text-2xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+  }
+
+  p {
+    @apply leading-7 [&:not(:first-child)]:mt-6;
+  }
+  /* Link Hover Styles */
+  a:hover,
+  .a:hover {
+    @apply opacity-80;
+  }
 }
 
 /* Input Styles for Number Fields (Cross-browser compatibility) */
@@ -61,26 +80,8 @@ input[type="number"] {
   -moz-appearance: textfield;
 }
 
-/* shadcn ui topography */
-h1 {
-  @apply scroll-m-20 text-4xl font-bold tracking-tight text-balance;
+@theme {
+  --color-forest:
+    "#2F5D3E", --color-pine: "#3E7748", --color-lake: "#4B91B0",
+    --color-mist: "#F7FAFC", --color-moss: "#7BA573";
 }
-
-h2 {
-  @apply scroll-m-20 border-b pb-1 mb-3 text-3xl font-semibold tracking-tight first:mt-0;
-}
-
-h3 {
-  @apply scroll-m-20 text-2xl font-semibold tracking-tight;
-}
-
-h4 {
-  @apply scroll-m-20 text-xl font-semibold tracking-tight;
-}
-
-p {
-  @apply leading-7 [&:not(:first-child)]:mt-6;
-}
-*/
-
-/* Font */
