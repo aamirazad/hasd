@@ -1,6 +1,7 @@
 ---
 const { title } = Astro.props;
 import { ClientRouter } from "astro:transitions";
+import { Font } from "astro:assets";
 ---
 
 <link rel="sitemap" href="/sitemap-index.xml" />
@@ -9,11 +10,18 @@ import { ClientRouter } from "astro:transitions";
 
 <!-- Web analytics -->
 <script
+  is:inline
   src="https://www.aamira.me/api/script.js"
   data-site-id="3"
   async
-  defer
-></script>
+  defer></script>
+
+<Font cssVariable="--font-inter" preload />
+<style>
+  body {
+    font-family: var(--font-inter);
+  }
+</style>
 
 <!-- Open Graph tags -->
 <meta property="og:title" content="HASD" />

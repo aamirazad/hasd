@@ -22,4 +22,21 @@ export default defineConfig({
       }),
     },
   },
+
+  experimental: {
+    fonts: [
+      {
+        provider: "local",
+        name: "Inter",
+        cssVariable: "--font-inter",
+        variants: [
+          {
+            weight: "100 900",
+            style: "normal",
+            src: ["./src/assets/fonts/InterVariable.woff2"],
+          },
+        ],
+      },
+    ],
+  },
 });
