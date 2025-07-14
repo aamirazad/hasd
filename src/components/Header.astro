@@ -47,7 +47,9 @@ const menu = [
             <a
               href={item.url}
               class={`block p-2 font-normal text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
-                (pathname === `${item.url}/` || pathname === item.url) &&
+                (item.url === "/"
+                  ? pathname == "/"
+                  : pathname.startsWith(item.url)) &&
                 "underline underline-offset-3 decoration-lake"
               }`}
               data-text={item.name}
