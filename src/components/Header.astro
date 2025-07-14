@@ -108,7 +108,7 @@ const menu = [
     <!-- Mobile links -->
     <ul
       id="nav-menu-mobile"
-      class="bg-[#d3efed]/80 glass absolute left-0 top-full shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg min-w-[10rem]"
+      class="bg-[#d3efed]/80 absolute left-0 top-full shadow-lg md:hidden text-center space-y-2 transition-all duration-300 overflow-hidden max-h-0 pointer-events-none rounded-b-lg min-w-[10rem]"
     >
       {
         menu.map((item) => (
@@ -116,7 +116,9 @@ const menu = [
             <a
               href={item.url}
               class={`block px-4 py-2 font-semibold text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
-                (pathname === `${item.url}/` || pathname === item.url) &&
+                (item.url === "/"
+                  ? pathname == "/"
+                  : pathname.startsWith(item.url)) &&
                 "underline underline-offset-3 decoration-lake"
               }`}
               onclick="document.getElementById('nav-toggle').checked = false;"
