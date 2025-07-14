@@ -1,0 +1,55 @@
+---
+export interface Props {
+  content: string;
+  placement?:
+    | "top"
+    | "bottom"
+    | "left"
+    | "right"
+    | "top-start"
+    | "top-end"
+    | "bottom-start"
+    | "bottom-end"
+    | "left-start"
+    | "left-end"
+    | "right-start"
+    | "right-end";
+  trigger?: "mouseenter" | "click" | "focusin" | "manual";
+  theme?: "dark" | "light" | "light-border" | "material" | "translucent";
+  animation?: "fade" | "shift-away" | "shift-toward" | "scale" | "perspective";
+  arrow?: boolean;
+  interactive?: boolean;
+  delay?: number | [number, number];
+  class?: string;
+}
+
+const {
+  content,
+  placement = "top",
+  trigger = "mouseenter",
+  theme = "dark",
+  animation = "fade",
+  arrow = true,
+  interactive = false,
+  delay = 0,
+  class: className = "",
+} = Astro.props;
+
+const tippyConfig = {
+  content,
+  placement,
+  trigger,
+  theme,
+  animation,
+  arrow,
+  interactive,
+  delay,
+};
+---
+
+<span
+  class={`tippy-trigger ${className}`}
+  data-tippy-config={JSON.stringify(tippyConfig)}
+>
+  <slot />
+</span>
