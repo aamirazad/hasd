@@ -3,6 +3,7 @@ import ReadingWidthLayout from "@/layouts/ReadingWidthLayout.astro";
 import TableOfContents from "@/components/TableOfContents.astro";
 import CalendarDays from "@/components/icons/CalendarDays.astro";
 import CircleUser from "@/components/icons/CircleUser.astro";
+import Tippy from "@/components/Tippy.astro";
 
 const { page, headings, processedContent } = Astro.props;
 
@@ -60,21 +61,12 @@ const showAsterisk =
             }
             <li class="pr-2 lg:pr-4 flex items-center">
               <CalendarDays className="inline-block size-4 lg:size-5 mr-1" />
-              <span
-                aria-label={hoverCreatedDate}
-                data-microtip-position="top"
-                role="tooltip">{formattedCreatedDate}</span
-              >
+              <Tippy content={hoverCreatedDate}>{formattedCreatedDate}</Tippy>
               {
                 showAsterisk && (
-                  <span
-                    class="cursor-default ml-0.5"
-                    aria-label={`Updated ${formattedUpdateDate}`}
-                    data-microtip-position="top"
-                    role="tooltip"
-                  >
-                    *
-                  </span>
+                  <Tippy content={`Updated ${formattedUpdateDate}`}>
+                    <span class="cursor-default ml-0.5">*</span>
+                  </Tippy>
                 )
               }
             </li>
