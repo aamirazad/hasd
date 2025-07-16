@@ -7,7 +7,7 @@ import Tippy from "./Tippy.astro";
   <div class="md:hidden w-fit">
     <div class="glass rounded-lg px-3 py-2 text-left">
       <a
-        class="text-lake hover:text-moss transition-colors underline decoration-lake/50 hover:decoration-moss text-sm"
+        class="underline text-sm"
         target="_blank"
         rel="noopener"
         href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
@@ -18,23 +18,19 @@ import Tippy from "./Tippy.astro";
 
   <!-- Desktop footer -->
   <div class="hidden md:block glass lg:rounded-lg p-4">
-    <div class="flex items-center justify-between text-left text-forest">
+    <div class="flex items-center justify-between text-left">
       <div class="flex-1">
+        <a href="/" class="font-semibold">HASD History Sim</a>
+        <span> © 2025 by </span>
         <a
-          href="/"
-          class="text-forest hover:text-pine transition-colors font-semibold"
-          >HASD History Sim</a
-        >
-        <span class="text-forest/80"> © 2025 by </span>
-        <a
-          class="text-lake hover:text-moss transition-colors underline decoration-lake/50 hover:decoration-moss"
+          class="underline"
           target="_blank"
           rel="noopener"
           href="mailto:amy.wilson%40hasdtigers.com">Amy Wilson</a
         >
-        <span class="text-forest/80"> is licensed under </span>
+        <span> is licensed under </span>
         <a
-          class="text-lake hover:text-moss transition-colors underline decoration-lake/50 hover:decoration-moss"
+          class="underline decorations"
           target="_blank"
           rel="noopener"
           href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
@@ -43,7 +39,7 @@ import Tippy from "./Tippy.astro";
       </div>
       <Tippy content="This site works best in Firefox">
         <svg
-          class="size-5 text-pine hover:text-moss transition-colors"
+          class="size-5"
           role="img"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

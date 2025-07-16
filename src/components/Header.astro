@@ -30,7 +30,7 @@ const menu = [
     <input id="nav-toggle" type="checkbox" class="hidden" />
     <label
       for="nav-toggle"
-      class="order-0 cursor-pointer flex items-center md:hidden text-forest hover:text-pine transition-colors lg:order-1"
+      class="order-0 cursor-pointer flex items-center md:hidden lg:order-1"
     >
       <svg id="show-button" class="h-6 fill-current block" viewBox="0 0 20 20">
         <title>Menu Open</title>
@@ -48,11 +48,11 @@ const menu = [
           <li>
             <a
               href={item.url}
-              class={`block p-2 font-normal text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
+              class={`block p-2 font-normal  dlg:px-2 lg:py-3 ${
                 (item.url === "/"
                   ? pathname == "/"
                   : pathname.startsWith(item.url)) &&
-                "underline underline-offset-3 decoration-lake"
+                "underline underline-offset-3"
               }`}
               data-text={item.name}
             >
@@ -67,7 +67,7 @@ const menu = [
     <div
       transition:persist
       id="analytics-badge"
-      class="order-2 flex items-center justify-center space-x-2 text-forest relative group"
+      class="order-2 flex items-center justify-center space-x-2 relative group"
       style="display: none;"
     >
       <Tippy content="Weekly pageviews">
@@ -91,7 +91,7 @@ const menu = [
         href="https://analytics.aamira.me/3"
         target="_blank"
         rel="noopener noreferrer"
-        class="hidden md:block absolute right-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-full group-hover:translate-x-0 p-1 hover:text-pine"
+        class="hidden md:block absolute right-0 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-x-full group-hover:translate-x-0 p-1"
         aria-label="Open analytics dashboard"
       >
         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -115,7 +115,7 @@ const menu = [
           <li>
             <a
               href={item.url}
-              class={`block px-4 py-2 font-semibold text-forest hover:text-pine transition-colors dlg:px-2 lg:py-3 ${
+              class={`block px-4 py-2 font-semibold  dlg:px-2 lg:py-3 ${
                 (item.url === "/"
                   ? pathname == "/"
                   : pathname.startsWith(item.url)) &&

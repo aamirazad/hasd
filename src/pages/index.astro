@@ -3,6 +3,84 @@ import ReadingWidthLayout from "@/layouts/ReadingWidthLayout.astro";
 ---
 
 <ReadingWidthLayout title="HASD Community">
-  <h1>Welcome to HASD History Club</h1>
-  <p class="text-lg mt-4">This site is in alpha state</p>
+  <div class="relative max-w-4xl mx-auto">
+    <h1
+      class="text-4xl sm:text-5xl md:text-5xl font-extrabold leading-tight tracking-tight animate-fade-in-up mt-4"
+    >
+      <span class="block text-gray-800">Welcome to HASD History Club</span>
+    </h1>
+
+    <div
+      class="grid md:grid-cols-2 gap-6 mt-12 animate-fade-in"
+      style="animation-fill-mode: forwards;"
+    >
+      <div
+        class="glass p-6 rounded-lg animate-fade-in-up delay-100"
+        style="animation-fill-mode: forwards;"
+      >
+        <h3 class="text-green-700 font-semibold mb-3">Explore the Sim</h3>
+        <p class="text-gray-700">
+          This site contains all the information you need to know about HASD's
+          History Club sim and more. Make sure you also join the google
+          classroom to never miss a sim. Code is <code
+            class="bg-muted relative rounded px-[0.1rem] py-[0.2rem] font-mono text-sm font-semibold"
+            >xtj4hus</code
+          >.
+        </p>
+      </div>
+      <div
+        class="glass p-6 rounded-lg animate-fade-in-up delay-100"
+        style="animation-fill-mode: forwards;"
+      >
+        <h3 class="text-[#4a2d24] font-semibold mb-3">SoM</h3>
+        <p class="text-gray-700">
+          SoM, while this website is mainly made for students in my school, you
+          should still check out some of the small features of this website. I
+          spent a lot of time making the website load as fast as possible the
+          background color first loads a low quality version, and the replaces
+          it with the high quality image lazily. Also links are almost instant,
+          check out
+          <a class="underline font-semibold" href="/sim/rules">Sim Rules</a>.
+          This is using astro's view transitions so no bloated js. I am really
+          happy with the blur effect on posts and how it looks, it almost looks
+          like apple's liquid glass. The website looks great on mobile and there
+          are numerous places you can hover for more information like a post's
+          exact publish time. Lastly, if you hover on the top left of the
+          screen, a link takes you to my pocketbase, where officers of my club
+          can edit the site without any coding knowledge.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(20px);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInNoMove {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.3s ease-out forwards;
+      transform: translateY(20px); /* Set initial state */
+    }
+    .animate-fade-in {
+      animation: fadeInNoMove 0.3s ease-out forwards;
+    }
+    .delay-100 {
+      animation-delay: 0.1s;
+    }
+  </style>
 </ReadingWidthLayout>

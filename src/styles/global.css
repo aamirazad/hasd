@@ -25,8 +25,8 @@
 
 @layer components {
   .glass {
-    @apply bg-white/25
-      backdrop-blur-lg
+    @apply bg-white/30
+      backdrop-blur-xl
       bg-clip-padding
       backdrop-filter
       backdrop-saturate-100
@@ -40,12 +40,7 @@
       0 2px 8px rgba(0, 0, 0, 0.15),
       0 0 0 1px rgba(47, 93, 62, 0.08);
   }
-  .link {
-    @apply underline decoration-sky-500/50 decoration-3;
-  }
-  .link:hover {
-    @apply decoration-sky-500;
-  }
+
   /* shadcn ui topography */
   h1 {
     @apply scroll-m-20 text-4xl font-bold tracking-tight text-balance;
@@ -85,7 +80,9 @@ input[type="number"] {
 }
 
 @theme {
-  --color-forest:
-    "#2F5D3E", --color-pine: "#3E7748", --color-lake: "#4B91B0",
-    --color-mist: "#F7FAFC", --color-moss: "#7BA573";
+  --color-forest: #2f5d3e;
+  --color-pine: #3e7748;
+  --color-lake: #4b91b0;
+  --color-mist: #f7fafc;
+  --color-moss: #7ba573;
 }
